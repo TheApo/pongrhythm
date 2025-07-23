@@ -1,0 +1,6 @@
+{
+  "name": "PongRhythm",
+  "description": "A rhythm game based on Pong, where you deflect musical notes to play a song.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
