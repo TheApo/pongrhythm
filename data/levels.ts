@@ -1,4 +1,4 @@
-import { LevelData, BallType, NOTE_FREQUENCIES } from '../types';
+import { LevelData, BallType, NOTE_FREQUENCIES, Instrument } from '../types';
 
 // Ode to Joy
 const ODE_BEAT = 500; // ms per beat (120 BPM)
@@ -300,6 +300,7 @@ export const levels: LevelData[] = [
   {
     id: 'ode-to-joy',
     name: 'Freude schöner Götterfunken',
+    instrument: Instrument.E_PIANO,
     notes: odeToJoyNotes,
     maxMisses: 10,
     beat: ODE_BEAT,
@@ -307,6 +308,7 @@ export const levels: LevelData[] = [
   {
     id: 'jingle-bells',
     name: 'Jingle Bells',
+    instrument: Instrument.BELL,
     notes: jingleBellsNotes,
     maxMisses: 12,
     beat: JB_BEAT,
@@ -314,6 +316,7 @@ export const levels: LevelData[] = [
   {
     id: 'silent-night',
     name: 'Stille Nacht, heilige Nacht',
+    instrument: Instrument.ACOUSTIC_PIANO,
     notes: silentNightNotes,
     maxMisses: 14,
     beat: SN_BEAT,
@@ -321,6 +324,7 @@ export const levels: LevelData[] = [
   {
     id: 'ohDuFroehliche',
     name: 'Oh du fröhliche',
+    instrument: Instrument.STRINGS,
     notes: oDuFroehlicheNotes,
     maxMisses: 10,
     beat: ODF_BEAT,

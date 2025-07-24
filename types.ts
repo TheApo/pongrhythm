@@ -1,3 +1,10 @@
+export enum Instrument {
+  E_PIANO = 'E_PIANO',
+  ACOUSTIC_PIANO = 'ACOUSTIC_PIANO',
+  BELL = 'BELL',
+  STRINGS = 'STRINGS',
+}
+
 export enum BallType {
   STANDARD = 'STANDARD',
   WAVE = 'WAVE',
@@ -16,6 +23,7 @@ export interface NoteData {
 export interface LevelData {
   id: string;
   name: string;
+  instrument: Instrument;
   notes: NoteData[];
   maxMisses: number;
   beat: number; // The base duration of a beat in milliseconds for the song

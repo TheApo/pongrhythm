@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { LevelData } from '../types';
 import audioService from '../services/audioService';
 
@@ -8,9 +9,23 @@ interface MainMenuProps {
 }
 
 const MainMenu: React.FC<MainMenuProps> = ({ levels, onSelectLevel }) => {
-  const handleSelect = (level: LevelData) => {
-    audioService.init();
-    onSelectLevel(level);
+  const [loadingLevelId, setLoadingLevelId] = useState<string | null>(null);
+
+  const handleSelect = async (level: LevelData) => {
+    if (loadingLevelId) return; // Prevent multiple clicks while loading
+
+    setLoadingLevelId(level.id);
+    try {
+      // This user interaction is required to start the AudioContext
+      // and begin loading the sound samples. We await it to ensure
+      // sounds are ready before proceeding to the next screen.
+      await audioService.initAndLoadSounds();
+      onSelectLevel(level);
+    } catch (error) {
+      console.error("Failed to initialize or load audio assets:", error);
+      // Reset loading state on error to allow user to try again.
+      setLoadingLevelId(null);
+    }
   };
 
   return (
@@ -23,9 +38,10 @@ const MainMenu: React.FC<MainMenuProps> = ({ levels, onSelectLevel }) => {
           <button
             key={level.id}
             onClick={() => handleSelect(level)}
-            className="w-full max-w-md text-2xl font-bold text-black bg-yellow-400 py-4 px-8 border-4 border-yellow-400 hover:bg-black hover:text-yellow-400 transition-colors duration-200"
+            disabled={loadingLevelId !== null}
+            className="w-full max-w-md text-2xl font-bold text-black bg-yellow-400 py-4 px-8 border-4 border-yellow-400 hover:bg-black hover:text-yellow-400 transition-colors duration-200 disabled:bg-gray-600 disabled:text-gray-400 disabled:border-gray-600 disabled:cursor-not-allowed"
           >
-            {level.name}
+            {loadingLevelId === level.id ? 'Lade Sounds...' : level.name}
           </button>
         ))}
       </div>

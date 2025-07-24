@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import { LevelData, BallState, BallType, NOTE_FREQUENCIES } from '../types';
+import { LevelData, BallState, BallType, NOTE_FREQUENCIES, Instrument } from '../types';
 import HUD from './HUD';
 import audioService from '../services/audioService';
 import { 
@@ -259,7 +259,7 @@ const GameView: React.FC<GameViewProps> = ({ level, difficulty, onReturnToMenu }
                     hitCount++;
                     ball.vx *= -1.05;
                     ball.x = PADDLE_X_POSITION + PADDLE_WIDTH;
-                    audioService.playNote(NOTE_FREQUENCIES[ball.note.pitch], ball.note.duration);
+                    audioService.playNote(NOTE_FREQUENCIES[ball.note.pitch], modifiedLevel.instrument, ball.note.duration);
                 }
                 if (ball.y < HUD_HEIGHT || ball.y > GAME_HEIGHT - BOTTOM_BAR_HEIGHT - BALL_SIZE) {
                     ball.y = Math.max(HUD_HEIGHT, Math.min(ball.y, GAME_HEIGHT - BOTTOM_BAR_HEIGHT - BALL_SIZE));
