@@ -222,9 +222,6 @@ const VERSE_2_START = VERSE_1_START + (VERSE_DURATION_BEATS + REST_BEATS) * SN_B
 const verse1 = silentNightVerse(VERSE_1_START);
 const verse2 = silentNightVerse(VERSE_2_START);
 
-// Make the very last note of the song the root note in a lower octave for a feeling of finality.
-verse2[verse2.length - 1].pitch = 'G3';
-
 const silentNightNotes: LevelData['notes'] = [
     ...verse1,
     ...verse2
